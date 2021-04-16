@@ -2,16 +2,10 @@ import React from 'react';
 import { Grid } from "@material-ui/core";
 
 import Product from "./Product/Product"
-import makeStyles from "./styles";
+import useStyles from "./styles";
 
-//products array
-const products = [
-    {id: 1, name: "Shoes", description: "Running Shoes", price: "R1099,99", image: "https://www.pexels.com/photo/person-wearing-grey-nike-sneakers-2729899/"},
-    {id: 2, name: "Thinkpad", description: "Lenovo Thinkpad", price: "R3200,00", image: "https://images.pexels.com/photos/2729899/pexels-photo-2729899.jpeg?cs=srgb&dl=pexels-karl-solano-2729899.jpg&fm=jpg"}
-];
-
-const Products = () => {
-    const classes = makeStyles();
+const Products = ({ products }) => {
+    const classes = useStyles();
 
     return (
         <main className={classes.content}>
