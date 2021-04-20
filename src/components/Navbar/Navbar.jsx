@@ -5,7 +5,7 @@ import { AppBar, Toolbar, IconButton, Badge, MenuItem, Menu, Typography } from "
 import logo from "../../assets/shop.png"
 import makeStyles from "./styles"
 
-const Navbar = () => {
+const Navbar = ({ totalItems }) => {
     const classes = makeStyles();
 
     return (
@@ -19,7 +19,8 @@ const Navbar = () => {
                     <div className={classes.grow} />
                     <div className={classes.button}>
                         <IconButton aria-label="Show cart items" color="inherit">
-                            <Badge badgeContent={2} color="secondary">
+                            <Badge badgeContent={totalItems} color="secondary">
+                                {console.log("cart badge: ", totalItems)}
                                 <ShoppingCart />
                             </Badge>
                         </IconButton>

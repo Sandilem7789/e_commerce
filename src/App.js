@@ -34,7 +34,7 @@ const App = () => {
     //console.log(products);
     return (
         <div>
-            <Navbar />
+            <Navbar totalItems={cart.total_items} />
             <Products products={products} onAddToCart={handleAddToCart} />
            {/* <Cart cart={cart} />*/}
         </div>
