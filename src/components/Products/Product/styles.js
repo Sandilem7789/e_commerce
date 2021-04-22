@@ -9,6 +9,10 @@ export default makeStyles(() => ({
         height: 0,
         paddingTop: "56.25%", //16:9 ratio
     },
+    img: {
+        height: 0,
+        paddingTop: "56.25%", //16:9 ratio
+    },
     cardActions: {
         display: "flex",
         justifyContent: "flex-end"

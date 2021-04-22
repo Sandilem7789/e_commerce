@@ -11,8 +11,11 @@ const Product = ({ product, onAddToCart }) => {
     //the product variables like name and price are actually from the back end API
     return (
         <Card className={classes.root}>
-            <img src={product.media.source} alt={product.name}  height="200" /> {/*had to resort to the  basics, framework doent wanna display image for some reason idk below*/}
-            <CardMedia className={classes.media} image={product.media.source} height="100%" title={product.name} />
+            <CardMedia 
+                className={classes.media} image={product.media.source} 
+                height="100%" title={product.name} 
+                style={{height: "10vh", paddingTop: '50%'}}
+            />
             <CardContent>
                 
                 <div className="classes.cardContent">
