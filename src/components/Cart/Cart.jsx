@@ -11,7 +11,7 @@ const Cart = ({ cart, handleUpdateCartQty, handleRemoveFromCart, handleEmptyCart
  
     const EmptyCart = () => (
         <Typography variant="subtitle1">
-            You have no items in your shopping cart, !
+            You have no items in your shopping cart,
             <Link to="/" className={classes.link}>Start adding some</Link>!
         </Typography>
     );
@@ -34,12 +34,16 @@ const Cart = ({ cart, handleUpdateCartQty, handleRemoveFromCart, handleEmptyCart
                         Subtotal: { cart.subtotal.formatted_with_symbol }
                     </Typography>
                     <div>
-                        <Button className={classes.emptyButton} size="large" 
+                        <Button 
+                            className={classes.emptyButton} size="large" 
                             type="button" variant="contained" color="secondary"
                             onClick={handleEmptyCart}
                         >Empty Cart</Button>
-                        <Button className={classes.checkout} size="large" 
-                            type="button" variant="contained" color="primary">Checkout</Button>
+                        <Button 
+                            className={classes.checkout} size="large" 
+                            type="button" variant="contained" color="primary"
+                            component={Link} to="/checkout"
+                        >Checkout</Button>
                     </div>
             </div>
         </>

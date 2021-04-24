@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { commerce } from "./lib/commerce";          //this API will do al the backend for us and we will only focus on the front end
 
-import { Products, Navbar, Cart } from "./components";         //file that makes this possible: ./components/index.js
+import { Products, Navbar, Cart, Checkout } from "./components";         //file that makes this possible: ./components/index.js
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 const App = () => {
@@ -69,6 +69,9 @@ const App = () => {
                             handleRemoveFromCart={handleRemoveFromCart}
                             handleEmptyCart={handleEmptyCart}
                         />
+                    </Route>
+                    <Route exact path="/checkout">
+                        <Checkout cart={cart} />
                     </Route>
                 </Switch>
             </div>
