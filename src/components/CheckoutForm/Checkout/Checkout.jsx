@@ -12,7 +12,7 @@ const Checkout = ({ cart }) => {
     const [activeStep, setActiveStep] = useState(0);
     const [checkoutToken, setCheckoutToken] = useState(null);
     const classes =  useStyles();                               //basically importing the css styling from styles.js
-
+    
     useEffect(() => {
         const generateToken = async () => {
             try {
@@ -26,8 +26,9 @@ const Checkout = ({ cart }) => {
         }
 
         generateToken();
-    }, []);
+    }, [cart]);
 
+    console.log("generate: ");
     const Confirmation = () => (
         <div>
             Confirmation
@@ -35,7 +36,7 @@ const Checkout = ({ cart }) => {
     );
 
     const Form = () => activeStep === 0 
-        ? <AddressForm /> 
+        ? <AddressForm checkoutToken={checkoutToken}/> 
         : <PaymentForm />
     return (
         <>
@@ -52,7 +53,7 @@ const Checkout = ({ cart }) => {
                             </Step>
                         ))}
                     </Stepper>
-                    {activeStep === steps.length ? <Confirmation /> : <Form />}
+                    {activeStep === steps.length ? <Confirmation /> : checkoutToken && <Form />}
                 </Paper>
             </main>
         </>

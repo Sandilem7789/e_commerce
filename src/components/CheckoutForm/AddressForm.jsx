@@ -6,7 +6,7 @@ import { commerce } from "../../lib/commerce";
 
 import FormInput from "./CustomTextField"
 
-const AddressForm = () => {
+const AddressForm = ({checkoutToken}) => {
     /*MANAGING FORM STATE: we are going to fetch these from the commerce.js API*/
     const [shippingCountries, setShippingCountries] = useState([]);
     const [shippingCountry, setShippingCountry] = useState("");
@@ -15,15 +15,27 @@ const AddressForm = () => {
     const [shippingOptions, setShippingOptions] = useState([]);
     const [shippingOption, setShippingOption] = useState("");
     const methods = useForm();              //tools to successfuly run the form
+
+
+    const countries = Object.entries(shippingCountries).map(([code, name]) => ({ id: code, label: name}))
+    
     
     /*FETCHING API METHODS*/
     const fetchShippingCountries = async (checkoutTokenId) => {
         const { countries } = await commerce.services.localeListShippingCountries(checkoutTokenId);
 
-        console.log("Shipping Countries", countries);
+        console.log("Shipping Countries:", countries);
         setShippingCountries(countries);
+        
+        /*GETTING THE COUNTRIES INTO AN ARRAY FORM*/
+        setShippingCountry(Object.keys(countries)[0])
+
     }
     
+    useEffect(() => {
+        
+        fetchShippingCountries(checkoutToken.id);
+    }, []);
     
                                     
     return (
@@ -38,15 +50,17 @@ const AddressForm = () => {
                         <FormInput reqiured name="email" label="Email" />
                         <FormInput reqiured name="city" label="City" />
                         <FormInput reqiured name="zip" label="ZIP / Postal Code" />
-                        {/*<Grid item xs={12} sm={6}>
+                        <Grid item xs={12} sm={6}>
                             <InputLabel>Shipping Country</InputLabel>
-                            <Select value={} fullWidth onChange={}>
-                                <MenuItem key={} value={}>
-                                    Select Me
-                                </MenuItem>
+                            <Select value={shippingCountry} fullWidth onChange={(e) => setShippingCountry(e.target.value)}>
+                                {countries.map((country) => (
+                                    <MenuItem key={country.id} value={country.id}>
+                                        {country.label}
+                                    </MenuItem>
+                                ))}
                             </Select>
                         </Grid>
-                        <Grid item xs={12} sm={6}>
+                        {/*<Grid item xs={12} sm={6}>
                             <InputLabel>Shipping Subdivisions</InputLabel>
                             <Select value={} fullWidth onChange={}>
                                 <MenuItem key={} value={}>
