@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { InputLabel, Select, MenuItem, Button, Grid, Typography } from "@material-ui/core";
 import { useForm, FormProvider } from "react-hook-form";
+import { Link } from "react-router-dom"
 
 import { commerce } from "../../lib/commerce";
 
@@ -19,7 +20,7 @@ const AddressForm = ({checkoutToken}) => {
 
     const countries = Object.entries(shippingCountries).map(([code, name]) => ({ id: code, label: name}))                                   //looping over the array of shippingCountries
     const subdivisions = Object.entries(shippingSubdivisions).map(([code, name]) => ({ id: code, label: name}))                             //looping over the array of shippingSubdivisions
-    const options = shippingOptions.map((sO) => ({ id: sO.id, label: `${sO.decription} - (${sO.price.formatted_with_symbol})`}))            //sO: shippingOption
+    const options = shippingOptions.map((sO) => ({ id: sO.id, label: `${sO.description} - (${sO.price.formatted_with_symbol})`}))            //sO: shippingOption
     
     /*FETCHING API METHODS*/
     const fetchShippingCountries = async (checkoutTokenId) => {
@@ -33,7 +34,7 @@ const AddressForm = ({checkoutToken}) => {
     /*SUBDIVISIONS OF COUNTRIES*/
     const fetchSubdivisions = async (countryCode) => {
         const { subdivisions } = await commerce.services.localeListSubdivisions(countryCode);
-        console.log("Subdivs", Object.keys(subdivisions)[0] );
+        //console.log("Subdivs", Object.keys(subdivisions)[0] );
         setShippingSubdivisions(subdivisions)
         setShippingSubdivision(Object.keys(subdivisions)[0]);
     } 
@@ -103,6 +104,11 @@ const AddressForm = ({checkoutToken}) => {
                             </Select>
                         </Grid>
                     </Grid>
+                    <br />
+                    <div style={{display: "flex", justifyContent: "space-between"}}>
+                        <Button component={Link} to="/cart" variant="outlined">Back to Cart</Button>
+                        <Button type="submit" variant="contained" color="primary">Next</Button>
+                    </div>
                 </form>
            </FormProvider>
         </>
