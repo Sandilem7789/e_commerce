@@ -11,6 +11,9 @@ const steps = ["Shipping Address", "Payment Details"]
 const Checkout = ({ cart }) => {
     const [activeStep, setActiveStep] = useState(0);
     const [checkoutToken, setCheckoutToken] = useState(null);
+    /*STATE FORM MANAGING SHIPPING DATA*/
+    const [shippingData, setShippingData] = useState({})
+
     const classes =  useStyles();                               //basically importing the css styling from styles.js
     
     useEffect(() => {
@@ -28,7 +31,16 @@ const Checkout = ({ cart }) => {
         generateToken();
     }, [cart]);
 
-    console.log("generate: ");
+    const nextStep = () => setActiveStep((prevActiveStep) => prevActiveStep + 1)
+    const backStep = () => setActiveStep((prevActiveStep) => prevActiveStep - 1)
+
+    const next = (data) => {
+        setShippingData(data);
+        
+        nextStep();
+    }
+
+    //console.log("generate: ");
     const Confirmation = () => (
         <div>
             Confirmation
@@ -36,8 +48,8 @@ const Checkout = ({ cart }) => {
     );
 
     const Form = () => activeStep === 0 
-        ? <AddressForm checkoutToken={checkoutToken}/> 
-        : <PaymentForm />
+        ? <AddressForm checkoutToken={checkoutToken} next={next} /> 
+        : <PaymentForm shippingData={shippingData} />
     return (
         <>
             <div className={classes.toolbar} />  

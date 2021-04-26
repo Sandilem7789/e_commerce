@@ -7,7 +7,7 @@ import { commerce } from "../../lib/commerce";
 
 import FormInput from "./CustomTextField"
 
-const AddressForm = ({checkoutToken}) => {
+const AddressForm = ({ checkoutToken, next }) => {
     /*MANAGING FORM STATE: we are going to fetch these from the commerce.js API*/
     const [shippingCountries, setShippingCountries] = useState([]);
     const [shippingCountry, setShippingCountry] = useState("");
@@ -65,7 +65,7 @@ const AddressForm = ({checkoutToken}) => {
         <>
            <Typography variant="h6" gutterBottom>Shipping Address</Typography>
            <FormProvider {...methods}>
-                <form onSubmit="" >
+                <form onSubmit={methods.handleSubmit((data) => next({...data, shippingCountry, shippingSubdivision, shippingOption}))} >
                     <Grid container spacing={3}>
                         <FormInput name="firstName" label="First Name" />
                         <FormInput name="LastName" label="Last Name" />
