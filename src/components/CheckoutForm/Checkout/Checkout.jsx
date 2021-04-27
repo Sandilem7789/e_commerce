@@ -31,8 +31,8 @@ const Checkout = ({ cart }) => {
         generateToken();
     }, [cart]);
 
-    const nextStep = () => setActiveStep((prevActiveStep) => prevActiveStep + 1)
-    const backStep = () => setActiveStep((prevActiveStep) => prevActiveStep - 1)
+    const nextStep = () => setActiveStep((prevActiveStep) => prevActiveStep + 1)            //used to go forward on the checkout section
+    const backStep = () => setActiveStep((prevActiveStep) => prevActiveStep - 1)            //used to go backwards on the checkout section
 
     const next = (data) => {
         setShippingData(data);
@@ -49,7 +49,7 @@ const Checkout = ({ cart }) => {
 
     const Form = () => activeStep === 0 
         ? <AddressForm checkoutToken={checkoutToken} next={next} /> 
-        : <PaymentForm shippingData={shippingData} checkoutToken={checkoutToken}  />
+        : <PaymentForm shippingData={shippingData} checkoutToken={checkoutToken} backStep={backStep} />
     return (
         <>
             <div className={classes.toolbar} />  
